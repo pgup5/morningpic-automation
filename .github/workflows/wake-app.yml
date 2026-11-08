@@ -3,7 +3,7 @@ name: Morningpic browser check
 on:
   workflow_dispatch:
   schedule:
-    - cron: "17 */8 * * *"
+    - cron: "17 */6 * * *"
 
 permissions:
   contents: read
@@ -28,6 +28,7 @@ jobs:
 
       - name: Install Playwright
         run: |
+          python -m pip install --upgrade pip
           python -m pip install playwright
           python -m playwright install --with-deps chromium
 
@@ -41,3 +42,4 @@ jobs:
           name: morningpic-result
           path: results/
           retention-days: 3
+          if-no-files-found: warn
